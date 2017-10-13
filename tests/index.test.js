@@ -9,5 +9,6 @@ test(`users should be able to view the '/' page`, async (t) => {
     .navigateTo(TEST_URL)
     .expect(Selector('H1').withText('Camputer').exists).ok()
     .expect(Selector('H2').withText('Temperature').exists).ok()
-    
+    .expect(Selector('H4').withText('32c').exists).ok()
+
 });
