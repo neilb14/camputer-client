@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import ReactDOM from 'react-dom';
 import axios from 'axios';
+import LastReading from './components/LastReading'
 
 class App extends Component {
   constructor() {
@@ -40,12 +41,10 @@ class App extends Component {
         </div>
         <div className="row">
             <div className="col-md-3">
-                <h2>Temperature</h2>
-                <h4 key={this.state.temperature.id}><strong>{this.state.temperature.value}</strong>{this.state.temperature.uom}</h4>
+                <LastReading sensorData={this.state.temperature} sensorName="Temperature" />
             </div>
             <div className="col-md-3">
-                <h2>Humidity</h2>
-                <h4 key={this.state.humidity.id}><strong>{this.state.humidity.value}</strong>{this.state.humidity.uom}</h4>
+                <LastReading sensorData={this.state.humidity} sensorName="Humidity" />
             </div>
           </div>
         </div>
