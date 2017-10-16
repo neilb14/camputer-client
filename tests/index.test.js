@@ -10,6 +10,7 @@ test(`users should be able to view the '/' page`, async (t) => {
     .expect(Selector('H1').withText('Camputer').exists).ok()
     .expect(Selector('H2').withText('Temperature').exists).ok()
     .expect(Selector('H4').withText('32c').exists).ok()
+    .expect(Selector('H5').withText(/^At:.*/).exists).ok()
     .expect(Selector('H2').withText('Humidity').exists).ok()
     .expect(Selector('H4').withText('42.8%').exists).ok()
 
