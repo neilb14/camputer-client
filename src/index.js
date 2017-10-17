@@ -25,6 +25,7 @@ class App extends Component {
   }
 
   componentDidMount(){
+      console.log('== componentDidMount');
       this.getLastTemperature();
       this.getLastHumidity();
   }
