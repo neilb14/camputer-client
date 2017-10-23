@@ -3,8 +3,16 @@ import React from 'react';
 let formatDate = function (d) {
     if(d=== undefined) return '';
     var date = new Date(d);
-    //return date.getYear() + '-' + (date.getMonth()+1) + '-' + date.getDate();
-    return date.toDateString() + ' ' + date.toLocaleTimeString();
+    var month = date.getMonth() + 1;
+    var day = date.getDate();
+    if(month < 10) {
+        month = '0' + month;
+    }
+    if(day < 10) {
+        day = '0' + day;
+    }
+    var dayMonthYear = date.getFullYear() + '-' + month + '-' + day;
+    return dayMonthYear + ' ' + date.toLocaleTimeString();
 }
 
 const LastReading = (props) => {
@@ -14,7 +22,7 @@ const LastReading = (props) => {
         <div key={ props.sensorData.id }>
             <h2>{ props.sensorName }</h2>
             <h4><strong>{props.sensorData.value}</strong>{ props.sensorData.uom }</h4>
-            <h5><strong>At: </strong>{ formattedDate }</h5>
+            <span class='timestamp'>{ formattedDate }</span>
         </div>
     );
 }
