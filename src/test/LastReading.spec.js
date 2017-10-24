@@ -25,7 +25,7 @@ test('LastReading component should display the value and unit of the last readin
         <LastReading sensorData={data} sensorName='Temperature' />
     );
     expect(wrapper.find('h4')).toHaveLength(1);
-    expect(wrapper.find('h4').text()).toEqual('21c');
+    expect(wrapper.find('h4').text()).toEqual('21\u2103');
 });
 
 test('LastReading component should format the reading value to one decimal place', () => {
@@ -33,6 +33,14 @@ test('LastReading component should format the reading value to one decimal place
     const wrapper = shallow(
         <LastReading sensorData={data} sensorName='Temperature' />
     );
-    expect(wrapper.find('h4').text()).toEqual('21.1c');
+    expect(wrapper.find('h4').text()).toEqual('21.1\u2103');
+});
+
+test('LastReading component should display imperial units', () => {
+    const data = {id:100, value:69.7567, uom:'f', timestamp: new Date()}
+    const wrapper = shallow(
+        <LastReading sensorData={data} sensorName='Temperature' />
+    );
+    expect(wrapper.find('h4').text()).toEqual('69.8\u2109');
 });
 
