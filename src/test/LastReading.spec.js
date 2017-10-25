@@ -44,3 +44,18 @@ test('LastReading component should display imperial units', () => {
     expect(wrapper.find('h4').text()).toEqual('69.8\u2109');
 });
 
+test('LastReading component should display negative values', () => {
+    const data = {id:100, value:-13.4567, uom:'c', timestamp: new Date()}
+    const wrapper = shallow(
+        <LastReading sensorData={data} sensorName='Temperature' />
+    );
+    expect(wrapper.find('h4').text()).toEqual('-13.5\u2103');
+});
+
+test('LastReading component should display time in correct format', ()=> {
+    const data = {id:100, value:21, uom:'c', timestamp: new Date(2017,2,2,10,30,0,0)}
+    const wrapper = shallow(
+        <LastReading sensorData={data} sensorName='Temperature' />
+    );
+    expect(wrapper.find('span.timestamp').text()).toEqual('2017-03-02 10:30:00 AM');
+});
