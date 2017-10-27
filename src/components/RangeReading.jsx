@@ -1,4 +1,5 @@
 import React from 'react';
+import SensorValue from '../components/SensorValue'
 
 function findLowValue(data) {
     if(data.length <= 0){
@@ -33,8 +34,8 @@ const RangeReading = (props) => {
     return (
         <div>
             <h2>{ props.sensorName }</h2>
-            <h4 className='low'>{ lowValue.value }</h4>
-            <h4 className='high'>{ highValue.value }</h4>
+            <SensorValue className="low" sensorData={ lowValue } />
+            <SensorValue className="high" sensorData={ highValue } />
         </div>
     );
 }

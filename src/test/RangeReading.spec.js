@@ -24,33 +24,7 @@ test('RangeReading component should gracefully handle no data points', () => {
     const wrapper = shallow(
         <RangeReading sensorData={data} sensorName='3hr Temperature' />
     );
-    expect(wrapper.find('h4')).toHaveLength(2);
-    expect(wrapper.find('h4.low').text()).toEqual('-');
-    expect(wrapper.find('h4.high').text()).toEqual('-');
-});
-
-test('RangeReading component should display the low value of the sensor over the range', () => {
-    const data = [
-        {id:100, value:28, uom:'c', timestamp: new Date()},
-        {id:101, value:26, uom:'c', timestamp: new Date()},
-        {id:102, value:30, uom:'c', timestamp: new Date()}
-    ]
-    const wrapper = shallow(
-        <RangeReading sensorData={data} sensorName='3hr Temperature' />
-    );
-    expect(wrapper.find('h4.low')).toHaveLength(1);
-    expect(wrapper.find('h4.low').text()).toEqual('26');
-});
-
-test('RangeReading component should display the low value of the sensor over the range', () => {
-    const data = [
-        {id:100, value:28, uom:'c', timestamp: new Date()},
-        {id:101, value:30, uom:'c', timestamp: new Date()},
-        {id:102, value:26, uom:'c', timestamp: new Date()}
-    ]
-    const wrapper = shallow(
-        <RangeReading sensorData={data} sensorName='3hr Temperature' />
-    );
-    expect(wrapper.find('h4.high')).toHaveLength(1);
-    expect(wrapper.find('h4.high').text()).toEqual('30');
+    expect(wrapper.find('SensorValue')).toHaveLength(2);
+    expect(wrapper.find('SensorValue[className="low"]')).toHaveLength(1);
+    expect(wrapper.find('SensorValue[className="high"]')).toHaveLength(1);
 });
