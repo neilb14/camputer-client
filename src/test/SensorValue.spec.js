@@ -68,3 +68,11 @@ test('SensorValue component should display imperial units', () => {
     expect(wrapper.find('h4').text()).toEqual('69.8\u2109');
 });
 
+test('SensorValue should handle being passed in a string', () => {
+    const data = {id:100, value:'-'};
+    const wrapper = shallow(
+        <SensorValue sensorData={data} />
+    )
+    expect(wrapper.find('h4').text()).toEqual('-');
+});
+

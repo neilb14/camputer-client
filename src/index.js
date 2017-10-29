@@ -2,13 +2,15 @@ import React, { Component } from 'react';
 import ReactDOM from 'react-dom';
 import axios from 'axios';
 import LastReading from './components/LastReading'
+import RangeReading from './components/RangeReading'
 
 class App extends Component {
   constructor() {
     super()
     this.state = {
         temperature: {},
-        humidity: {}
+        humidity: {},
+        range_temperature: []
     }
   }
   
@@ -24,8 +26,15 @@ class App extends Component {
     .catch((err) => { console.log(err); })
   }
 
+  getTemperatureRange() {
+    axios.get(`${process.env.REACT_APP_CAMPUTER_SERVICE_URL}/temperatures?hours=3`)
+    .then((res) => { this.setState({range_temperature:res.data.readings}); })
+    .catch((err) => { console.log(err); })
+  }
+
   componentDidMount(){
       this.getLastTemperature();
+      this.getTemperatureRange();
       this.getLastHumidity();
   }
 
@@ -46,8 +55,13 @@ class App extends Component {
             <div className="col-md-3">
                 <LastReading sensorData={this.state.humidity} sensorName="Humidity" />
             </div>
-          </div>
         </div>
+        <div className="row">
+            <div className="col-md-6">
+                <RangeReading sensorData={this.state.range_temperature} sensorName="3hrs Temperature" />
+            </div>
+        </div>
+    </div>
     )
   }
 }

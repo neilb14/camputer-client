@@ -1,7 +1,9 @@
 import React from 'react';
 
 let formatValue = function(v) {
+    console.log(v + ' ' + typeof v);
     if(v===undefined) return '-';
+    if(typeof v === 'string') return v;
     return Math.round(v*10, -1)/10;
 }
 

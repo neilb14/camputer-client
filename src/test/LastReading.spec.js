@@ -3,7 +3,7 @@ import Enzyme from 'enzyme';
 import Adapter from 'enzyme-adapter-react-16';
 Enzyme.configure({ adapter: new Adapter() });
 
-import { shallow } from 'enzyme';
+import { shallow, mount } from 'enzyme';
 import LastReading from '../components/LastReading';
 
 beforeEach(()=>{
@@ -21,10 +21,11 @@ test('LastReading component should display the name of the sensor', () => {
 
 test('LastReading component should display the SensorValue of the last reading', () => {
     const data = {id:100, value:21, uom:'c', timestamp: new Date()}
-    const wrapper = shallow(
+    const wrapper = mount(
         <LastReading sensorData={data} sensorName='Temperature' />
     );
-    expect(wrapper.find('SensorValue')).toHaveLength(1);
+    expect(wrapper.find('h4')).toHaveLength(1);
+    expect(wrapper.find('h4').text()).toEqual('21\u2103');
 });
 
 test('LastReading component should display time in correct format', ()=> {

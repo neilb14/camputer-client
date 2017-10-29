@@ -3,7 +3,7 @@ import SensorValue from '../components/SensorValue'
 
 function findLowValue(data) {
     if(data.length <= 0){
-        return {value:'-'};
+        return {id:0, value:'-'};
     }
     var champion = data[0];
     for(var i=0; i < data.length; i++ ){
@@ -16,7 +16,7 @@ function findLowValue(data) {
 
 function findHighValue(data) {
     if(data.length <= 0){
-        return {value:'-'};
+        return {id:0, value:'-'};
     }
     var champion = data[0];
     for(var i=0; i < data.length; i++ ){
