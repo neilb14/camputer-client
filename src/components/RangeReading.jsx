@@ -34,8 +34,8 @@ const RangeReading = (props) => {
     return (
         <div>
             <h2>{ props.sensorName }</h2>
-            <SensorValue className="low" sensorData={ lowValue } />
-            <SensorValue className="high" sensorData={ highValue } />
+            <span><strong>Low: </strong><SensorValue className="low" sensorData={ lowValue } /></span>
+            <span><strong>High: </strong><SensorValue className="high" sensorData={ highValue } /></span>
         </div>
     );
 }

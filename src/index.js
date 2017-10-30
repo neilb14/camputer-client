@@ -1,8 +1,9 @@
 import React, { Component } from 'react';
 import ReactDOM from 'react-dom';
 import axios from 'axios';
-import LastReading from './components/LastReading'
-import RangeReading from './components/RangeReading'
+import LastReading from './components/LastReading';
+import RangeReading from './components/RangeReading';
+import RangeChart from './components/RangeChart';
 
 class App extends Component {
   constructor() {
@@ -54,6 +55,11 @@ class App extends Component {
             </div>
             <div className="col-md-3">
                 <LastReading sensorData={this.state.humidity} sensorName="Humidity" />
+            </div>
+        </div>
+        <div className="row">
+            <div className="col-md-6">
+                <RangeChart sensorData={this.state.range_temperature} />
             </div>
         </div>
         <div className="row">
