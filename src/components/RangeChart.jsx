@@ -7,8 +7,8 @@ const RangeChart = (props) => {
             <LineChart width={400} height={300} data={ props.sensorData } 
                         margin={{ top: 5, right: 30, left: 20, bottom: 5 }}>
                 <XAxis dataKey="timestamp" label="Time" />
-                <YAxis label="Temperature"/>
-                <Line type="monotone" dataKey="value" stroke="#8884d8" />
+                <YAxis label="Temperature" domain={['datamin - 2', 'datamax+2']} />
+                <Line type="monotone" dataKey="value" stroke="#8884d8" dot={false}/>
             </LineChart>
         </div>
     );
