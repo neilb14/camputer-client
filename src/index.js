@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import ReactDOM from 'react-dom';
 import PageHeader from 'react-bootstrap/lib/PageHeader';
 import axios from 'axios';
+import moment from 'moment-timezone';
 import LastReading from './components/LastReading';
 import RangeReading from './components/RangeReading';
 import RangeChart from './components/RangeChart';
@@ -44,9 +45,10 @@ class App extends Component {
   }
 
   render() {
+    var currentTimestamp = moment().tz('America/Edmonton').format(' h:mma MMMM DD, YYYY');
     return (
       <div className="container">
-        <PageHeader><img className='logo' src='./images/002-camping-1-large.png' alt='Logo' height='60px'/>Camputer <small>Oct 31, 2017</small></PageHeader>
+        <PageHeader><img className='logo' src='./images/002-camping-1-large.png' alt='Logo' height='60px'/><small>{ currentTimestamp }</small></PageHeader>
         <div className="row">
             <div className="col-md-3">
                 <LastReading sensorData={this.state.temperature} sensorName="Temperature" />
