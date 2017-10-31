@@ -1,9 +1,12 @@
 import React, { Component } from 'react';
 import ReactDOM from 'react-dom';
+import PageHeader from 'react-bootstrap/lib/PageHeader';
 import axios from 'axios';
 import LastReading from './components/LastReading';
 import RangeReading from './components/RangeReading';
 import RangeChart from './components/RangeChart';
+
+import './css/bootstrap.min.css';
 
 class App extends Component {
   constructor() {
@@ -42,13 +45,7 @@ class App extends Component {
   render() {
     return (
       <div className="container">
-        <div className="row">
-          <div className="col-md-6">
-            <br/>
-            <h1>Camputer</h1>
-            <hr/><br/>
-          </div>
-        </div>
+        <PageHeader><img src='./images/002-camping-1-large.png' alt='Logo' height='60px'/>Camputer <small>Oct 31, 2017</small></PageHeader>
         <div className="row">
             <div className="col-md-3">
                 <LastReading sensorData={this.state.temperature} sensorName="Temperature" />
