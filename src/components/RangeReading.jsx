@@ -7,7 +7,7 @@ function findLowValue(data) {
     }
     var champion = data[0];
     for(var i=0; i < data.length; i++ ){
-        if(parseInt(data[i].value) < parseInt(champion.value)){
+        if(parseFloat(data[i].value) < parseFloat(champion.value)){
             champion = data[i];
         }
     }
@@ -20,7 +20,7 @@ function findHighValue(data) {
     }
     var champion = data[0];
     for(var i=0; i < data.length; i++ ){
-        if(parseInt(data[i].value) > parseInt(champion.value)){
+        if(parseFloat(data[i].value) > parseFloat(champion.value)){
             champion = data[i];
         }
     }

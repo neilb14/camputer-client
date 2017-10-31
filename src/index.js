@@ -7,6 +7,7 @@ import RangeReading from './components/RangeReading';
 import RangeChart from './components/RangeChart';
 
 import './css/bootstrap.min.css';
+import './css/index.css';
 
 class App extends Component {
   constructor() {
@@ -45,7 +46,7 @@ class App extends Component {
   render() {
     return (
       <div className="container">
-        <PageHeader><img src='./images/002-camping-1-large.png' alt='Logo' height='60px'/>Camputer <small>Oct 31, 2017</small></PageHeader>
+        <PageHeader><img className='logo' src='./images/002-camping-1-large.png' alt='Logo' height='60px'/>Camputer <small>Oct 31, 2017</small></PageHeader>
         <div className="row">
             <div className="col-md-3">
                 <LastReading sensorData={this.state.temperature} sensorName="Temperature" />
