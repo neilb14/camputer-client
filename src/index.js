@@ -48,7 +48,7 @@ class App extends Component {
     var currentTimestamp = moment().tz('America/Edmonton').format(' h:mma MMMM DD, YYYY');
     return (
       <div className="container">
-        <PageHeader><img className='logo' src='./images/002-camping-1.png' alt='Logo' height='60px'/><small>{ currentTimestamp }</small></PageHeader>
+        <PageHeader><img className='logo' src='./images/002-camping-144x144.png' alt='Logo' height='60px'/><small>{ currentTimestamp }</small></PageHeader>
         <div className="row">
             <div className="col-md-3">
                 <LastReading sensorData={this.state.temperature} sensorName="Temperature" />
