@@ -16,13 +16,22 @@ let formatDate = function (d) {
     return dayMonthYear + ' ' + date.toLocaleTimeString();
 }
 
+const h2Style = {
+    fontSize: '16px',
+    fontWeight: 'bold',
+}
+
+const timestampStyle = {
+    fontSize: '10px',
+}
+
 const LastReading = (props) => {
     var formattedDate = formatDate(props.sensorData.timestamp);
     return (
         <div key={ props.sensorData.id }>
-            <h2>{ props.sensorName }</h2>
+            <h2 style={ h2Style }>{ props.sensorName }</h2>
             <SensorValue sensorData={ props.sensorData } />
-            <span className='timestamp'>{ formattedDate }</span>
+            <span className='timestamp' style={ timestampStyle }>{ formattedDate }</span>
         </div>
     );
 }
