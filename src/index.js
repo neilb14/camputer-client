@@ -11,9 +11,11 @@ import './css/bootstrap.min.css';
 import './css/index.css';
 
 class App extends Component {
-  constructor() {
+    constructor() {
     super()
+    this.timeoutInMs = 1*60*1000;
     this.state = {
+        time: moment().tz('America/Edmonton').format(' h:mma MMMM DD, YYYY'),
         temperature: {},
         humidity: {},
         range_temperature: []
@@ -38,17 +40,25 @@ class App extends Component {
     .catch((err) => { console.log(err); })
   }
 
+  onTimeout() {
+    this.setState({time: moment().tz('America/Edmonton').format(' h:mma MMMM DD, YYYY')}); 
+    this.getLastTemperature();
+    this.getTemperatureRange();
+    this.getLastHumidity();
+    setTimeout(() => { this.onTimeout() }, this.timeoutInMs);
+  }
+
   componentDidMount(){
-      this.getLastTemperature();
-      this.getTemperatureRange();
-      this.getLastHumidity();
+    this.getLastTemperature();
+    this.getTemperatureRange();
+    this.getLastHumidity();
+    setTimeout(()=>{ this.onTimeout() }, this.timeoutInMs)
   }
 
   render() {
-    var currentTimestamp = moment().tz('America/Edmonton').format(' h:mma MMMM DD, YYYY');
     return (
       <div className="container">
-        <PageHeader><img className='logo' src='./images/002-camping-144x144.png' alt='Logo' height='60px'/><small>{ currentTimestamp }</small></PageHeader>
+        <PageHeader><img className='logo' src='./images/002-camping-144x144.png' alt='Logo' height='60px'/><small>{ this.state.time }</small></PageHeader>
         <div className="row">
             <div className="col-md-3">
                 <LastReading sensorData={this.state.temperature} sensorName="Temperature" />

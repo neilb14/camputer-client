@@ -21,7 +21,7 @@ test('LastReading component should display the name of the sensor', () => {
         <LastReading sensorData={data} sensorName='Temperature' />
     );
     expect(wrapper.find('h2')).toHaveLength(1);
-    expect(wrapper.contains(<h2>Temperature</h2>)).toEqual(true);
+    expect(wrapper.find('h2').text()).toEqual('Temperature');
 });
 
 test('LastReading component should display the SensorValue of the last reading', () => {

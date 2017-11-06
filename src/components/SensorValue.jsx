@@ -26,7 +26,7 @@ const SensorValue = (props) => {
     var formattedUom = formatUom(props.sensorData.uom);
     return (
         <span key={ props.sensorData.id }>
-            <h4 className={ props.className }><strong>{ formattedValue }</strong>{ formattedUom }</h4>
+            <h4 style={ h4Style } className={ props.className }><strong>{ formattedValue }</strong>{ formattedUom }</h4>
         </span>
     );
 }
