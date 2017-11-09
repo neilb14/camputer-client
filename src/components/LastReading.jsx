@@ -1,19 +1,11 @@
 import React from 'react';
-import SensorValue from '../components/SensorValue'
+import moment from 'moment-timezone';
+import SensorValue from '../components/SensorValue';
+
 
 let formatDate = function (d) {
     if(d=== undefined) return '';
-    var date = new Date(d);
-    var month = date.getMonth() + 1;
-    var day = date.getDate();
-    if(month < 10) {
-        month = '0' + month;
-    }
-    if(day < 10) {
-        day = '0' + day;
-    }
-    var dayMonthYear = date.getFullYear() + '-' + month + '-' + day;
-    return dayMonthYear + ' ' + date.toLocaleTimeString();
+    return moment(d).tz('America/Edmonton').format('YYYY-MM-DD h:mm:ss A');
 }
 
 const h2Style = {
