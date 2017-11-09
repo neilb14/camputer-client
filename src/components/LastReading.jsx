@@ -5,7 +5,7 @@ import SensorValue from '../components/SensorValue';
 
 let formatDate = function (d) {
     if(d=== undefined) return '';
-    return moment(d).tz('America/Edmonton').format('YYYY-MM-DD h:mm:ss A');
+    return moment(d).tz('America/Edmonton').format('YYYY-MM-DD h:mm A');
 }
 
 const h2Style = {

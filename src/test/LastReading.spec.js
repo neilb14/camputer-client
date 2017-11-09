@@ -38,5 +38,5 @@ test('LastReading component should display time in correct format', ()=> {
     const wrapper = shallow(
         <LastReading sensorData={data} sensorName='Temperature' />
     );
-    expect(wrapper.find('span.timestamp').text()).toEqual('2017-03-02 10:30:00 AM');
+    expect(wrapper.find('span.timestamp').text()).toEqual('2017-03-02 10:30 AM');
 });

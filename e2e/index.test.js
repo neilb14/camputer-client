@@ -21,11 +21,9 @@ fixture('/')
     .catch((err) => { console.log(err); })
   });
 
-test(`users should be able to view the '/' page`, async (t) => {
-  
+test(`users should be able to view the '/' page`, async (t) => {  
   const timestamp = moment().tz('America/Edmonton').format(' h:mma MMMM DD, YYYY');
-  const lastReadingTimestamp = t.ctx.timestamp.tz('America/Edmonton').format('YYYY-MM-DD h:mm:ss A');
-  console.log('expecting: [' + lastReadingTimestamp + ']');
+  const lastReadingTimestamp = t.ctx.timestamp.tz('America/Edmonton').format('YYYY-MM-DD h:mm A');
   await t
     .navigateTo(TEST_URL)
     .expect(Selector('H1').withText(timestamp).exists).ok()
@@ -33,5 +31,6 @@ test(`users should be able to view the '/' page`, async (t) => {
     .expect(Selector('H4').withText('12.3\u2103').exists).ok()
     .expect(Selector('H2').withText('Humidity').exists).ok()
     .expect(Selector('H4').withText('45.6%').exists).ok()
-    .expect(Selector('span.timestamp').withText(lastReadingTimestamp).exists).ok()
+    .expect(Selector('span.timestamp').withText(lastReadingTimestamp).count).eql(2)
+    .expect(Selector('span.timestamp').withText(lastReadingTimestamp).exists).ok();
 });
