@@ -10,11 +10,13 @@ fixture('/')
     t.ctx.timestamp = moment();
     const serializedTimestamp = t.ctx.timestamp.tz('Europe/London').format('YYYY-MM-DDTh:mm:ss.000000');
     axios.post(`${process.env.REACT_APP_CAMPUTER_SERVICE_URL}/sensorreadings`,{
+      name: 'temperature',
       timestamp: serializedTimestamp,
       value:12.3
     })
     .catch((err) => { console.log(err); })
-    axios.post(`${process.env.REACT_APP_CAMPUTER_SERVICE_URL}/humidities`,{
+    axios.post(`${process.env.REACT_APP_CAMPUTER_SERVICE_URL}/sensorreadings`,{
+      name: 'humidity',
       timestamp: serializedTimestamp,
       value:45.6
     })
