@@ -23,7 +23,7 @@ class App extends Component {
   }
 
   getLastTemperature() {
-    axios.get(`${process.env.REACT_APP_CAMPUTER_SERVICE_URL}/temperatures/last`)
+    axios.get(`${process.env.REACT_APP_CAMPUTER_SERVICE_URL}/sensorreadings/last`)
     .then((res) => { this.setState({temperature:res.data}); })
     .catch((err) => { console.log(err); })
   }
@@ -35,7 +35,7 @@ class App extends Component {
   }
 
   getTemperatureRange() {
-    axios.get(`${process.env.REACT_APP_CAMPUTER_SERVICE_URL}/temperatures?hours=3`)
+    axios.get(`${process.env.REACT_APP_CAMPUTER_SERVICE_URL}/sensorreadings?hours=3`)
     .then((res) => { this.setState({range_temperature:res.data.readings}); })
     .catch((err) => { console.log(err); })
   }

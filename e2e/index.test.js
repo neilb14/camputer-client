@@ -9,7 +9,7 @@ fixture('/')
   .beforeEach( async t => {
     t.ctx.timestamp = moment();
     const serializedTimestamp = t.ctx.timestamp.tz('Europe/London').format('YYYY-MM-DDTh:mm:ss.000000');
-    axios.post(`${process.env.REACT_APP_CAMPUTER_SERVICE_URL}/temperatures`,{
+    axios.post(`${process.env.REACT_APP_CAMPUTER_SERVICE_URL}/sensorreadings`,{
       timestamp: serializedTimestamp,
       value:12.3
     })
@@ -24,6 +24,7 @@ fixture('/')
 test(`users should be able to view the '/' page`, async (t) => {  
   const timestamp = moment().tz('America/Edmonton').format(' h:mma MMMM DD, YYYY');
   const lastReadingTimestamp = t.ctx.timestamp.tz('America/Edmonton').format('YYYY-MM-DD h:mm A');
+  console.log(lastReadingTimestamp);
   await t
     .navigateTo(TEST_URL)
     .expect(Selector('H1').withText(timestamp).exists).ok()
