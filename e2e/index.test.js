@@ -12,13 +12,15 @@ fixture('/')
     axios.post(`${process.env.REACT_APP_CAMPUTER_SERVICE_URL}/sensorreadings`,{
       name: 'temperature',
       timestamp: serializedTimestamp,
-      value:12.3
+      value:12.3,
+      uom: 'c'
     })
     .catch((err) => { console.log(err); })
     axios.post(`${process.env.REACT_APP_CAMPUTER_SERVICE_URL}/sensorreadings`,{
       name: 'humidity',
       timestamp: serializedTimestamp,
-      value:45.6
+      value:45.6,
+      uom: '%'
     })
     .catch((err) => { console.log(err); })
   });
