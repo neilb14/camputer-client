@@ -17,6 +17,13 @@ fixture('/')
     })
     .catch((err) => { console.log(err); })
     axios.post(`${process.env.REACT_APP_CAMPUTER_SERVICE_URL}/sensorreadings`,{
+      name: 'darksky',
+      timestamp: serializedTimestamp,
+      value:-8.3,
+      uom: 'c'
+    })
+    .catch((err) => { console.log(err); })
+    axios.post(`${process.env.REACT_APP_CAMPUTER_SERVICE_URL}/sensorreadings`,{
       name: 'humidity',
       timestamp: serializedTimestamp,
       value:45.6,
@@ -34,6 +41,8 @@ test(`users should be able to view the '/' page`, async (t) => {
     .expect(Selector('H1').withText(timestamp).exists).ok()
     .expect(Selector('H2').withText('Temperature').exists).ok()
     .expect(Selector('H4').withText('12.3\u2103').exists).ok()
+    .expect(Selector('H2').withText('Darksky').exists).ok()
+    .expect(Selector('H4').withText('-8.3\u2103').exists).ok()
     .expect(Selector('H2').withText('Humidity').exists).ok()
     .expect(Selector('H4').withText('45.6%').exists).ok()
     .expect(Selector('span.timestamp').withText(lastReadingTimestamp).count).eql(2)

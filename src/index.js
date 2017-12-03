@@ -17,6 +17,7 @@ class App extends Component {
     this.state = {
         time: moment().tz('America/Edmonton').format(' h:mma MMMM DD, YYYY'),
         temperature: {},
+        darksky: {},
         humidity: {},
         range_temperature: []
     }
@@ -25,6 +26,12 @@ class App extends Component {
   getLastTemperature() {
     axios.get(`${process.env.REACT_APP_CAMPUTER_SERVICE_URL}/sensorreadings/last?name=temperature`)
     .then((res) => { this.setState({temperature:res.data}); })
+    .catch((err) => { console.log(err); })
+  }
+
+  getLastDarksky() {
+    axios.get(`${process.env.REACT_APP_CAMPUTER_SERVICE_URL}/sensorreadings/last?name=darksky`)
+    .then((res) => { this.setState({darksky:res.data}); })
     .catch((err) => { console.log(err); })
   }
   
@@ -43,6 +50,7 @@ class App extends Component {
   onTimeout() {
     this.setState({time: moment().tz('America/Edmonton').format(' h:mma MMMM DD, YYYY')}); 
     this.getLastTemperature();
+    this.getLastDarksky();
     this.getTemperatureRange();
     this.getLastHumidity();
     setTimeout(() => { this.onTimeout() }, this.timeoutInMs);
@@ -64,8 +72,8 @@ class App extends Component {
                 <LastReading sensorData={this.state.temperature} sensorName="Temperature" />
             </div>
             <div className="col-md-3">
-                <LastReading sensorData={this.state.humidity} sensorName="Humidity" />
-            </div>
+                <LastReading sensorData={this.state.darksky} sensorName="Darksky" />
+            </div>            
         </div>
         <div className="row">
             <div className="col-md-6">
@@ -73,9 +81,12 @@ class App extends Component {
             </div>
         </div>
         <div className="row">
-            <div className="col-md-6">
+            <div className="col-md-3">
                 <RangeReading sensorData={this.state.range_temperature} sensorName="3hrs Temperature" />
             </div>
+            <div className="col-md-3">
+                <LastReading sensorData={this.state.humidity} sensorName="Humidity" />
+            </div>            
         </div>
     </div>
     )
