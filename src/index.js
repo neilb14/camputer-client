@@ -6,6 +6,7 @@ import moment from 'moment-timezone';
 import LastReading from './components/LastReading';
 import RangeReading from './components/RangeReading';
 import RangeChart from './components/RangeChart';
+import Guage from './components/Guage';
 
 import './css/bootstrap.min.css';
 import './css/index.css';
@@ -69,7 +70,7 @@ class App extends Component {
         <PageHeader><img className='logo' src='./images/002-camping-144x144.png' alt='Logo' height='60px'/><small>{ this.state.time }</small></PageHeader>
         <div className="row">
             <div className="col-md-3">
-                <LastReading sensorData={this.state.temperature} sensorName="Temperature" />
+                <Guage />
             </div>
             <div className="col-md-3">
                 <LastReading sensorData={this.state.darksky} sensorName="Darksky" />
