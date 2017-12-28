@@ -54,6 +54,7 @@ class App extends Component {
     this.getLastDarksky();
     this.getTemperatureRange();
     this.getLastHumidity();
+    this.getLastDarksky();
     setTimeout(() => { this.onTimeout() }, this.timeoutInMs);
   }
 
