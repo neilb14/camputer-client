@@ -6,7 +6,7 @@ import moment from 'moment-timezone';
 import LastReading from './components/LastReading';
 import RangeReading from './components/RangeReading';
 import RangeChart from './components/RangeChart';
-import Guage from './components/Guage';
+import TemperatureReading from './components/TemperatureReading';
 
 import './css/bootstrap.min.css';
 import './css/index.css';
@@ -19,6 +19,7 @@ class App extends Component {
         time: moment().tz('America/Edmonton').format(' h:mma MMMM DD, YYYY'),
         temperature: {},
         darksky: {},
+        outside: {},
         humidity: {},
         range_temperature: []
     }
@@ -27,6 +28,12 @@ class App extends Component {
   getLastTemperature() {
     axios.get(`${process.env.REACT_APP_CAMPUTER_SERVICE_URL}/sensorreadings/last?name=temperature`)
     .then((res) => { this.setState({temperature:res.data}); })
+    .catch((err) => { console.log(err); })
+  }
+
+  getLastOutside() {
+    axios.get(`${process.env.REACT_APP_CAMPUTER_SERVICE_URL}/sensorreadings/last?name=outside`)
+    .then((res) => { this.setState({outside:res.data}); })
     .catch((err) => { console.log(err); })
   }
 
@@ -51,6 +58,7 @@ class App extends Component {
   onTimeout() {
     this.setState({time: moment().tz('America/Edmonton').format(' h:mma MMMM DD, YYYY')}); 
     this.getLastTemperature();
+    this.getLastOutside();
     this.getLastDarksky();
     this.getTemperatureRange();
     this.getLastHumidity();
@@ -60,6 +68,7 @@ class App extends Component {
   componentDidMount(){
     this.getLastDarksky();
     this.getLastTemperature();
+    this.getLastOutside();
     this.getTemperatureRange();
     this.getLastHumidity();
     setTimeout(()=>{ this.onTimeout() }, this.timeoutInMs)
@@ -71,11 +80,14 @@ class App extends Component {
         <PageHeader><img className='logo' src='./images/002-camping-144x144.png' alt='Logo' height='60px'/><small>{ this.state.time }</small></PageHeader>
         <div className="row">
             <div className="col-md-3">
-                <Guage />
+                <TemperatureReading  sensorData={this.state.temperature} sensorName="Inside" />
             </div>
             <div className="col-md-3">
-                <LastReading sensorData={this.state.darksky} sensorName="Darksky" />
-            </div>            
+                <TemperatureReading sensorData={this.state.outside} sensorName="Outside" />
+            </div>
+            <div className="col-md-3">
+                <TemperatureReading sensorData={this.state.darksky} sensorName="Darksky" />
+            </div>
         </div>
         <div className="row">
             <div className="col-md-6">
