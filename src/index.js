@@ -21,7 +21,8 @@ class App extends Component {
         darksky: {},
         outside: {},
         humidity: {},
-        range_temperature: []
+        range_inside: [],
+        range_outside: []
     }
   }
 
@@ -51,8 +52,11 @@ class App extends Component {
 
   getTemperatureRange() {
     axios.get(`${process.env.REACT_APP_CAMPUTER_SERVICE_URL}/sensorreadings?name=temperature&hours=3`)
-    .then((res) => { this.setState({range_temperature:res.data.readings}); })
-    .catch((err) => { console.log(err); })
+      .then((res) => { this.setState({range_inside:res.data.readings}); })
+      .catch((err) => { console.log(err); });
+    axios.get(`${process.env.REACT_APP_CAMPUTER_SERVICE_URL}/sensorreadings?name=outside&hours=3`)
+      .then((res) => { this.setState({range_outside:res.data.readings}); })
+      .catch((err) => { console.log(err); });
   }
 
   onTimeout() {
@@ -91,12 +95,12 @@ class App extends Component {
         </div>
         <div className="row">
             <div className="col-md-6">
-                <RangeChart sensorData={this.state.range_temperature} />
+                <RangeChart insideData={ this.state.range_inside } outsideData={ this.state.range_outside } />
             </div>
         </div>
         <div className="row">
             <div className="col-md-3">
-                <RangeReading sensorData={this.state.range_temperature} sensorName="3hrs Temperature" />
+                <RangeReading sensorData={this.state.range_inside} sensorName="3hrs Temperature" />
             </div>
             <div className="col-md-3">
                 <LastReading sensorData={this.state.humidity} sensorName="Humidity" />

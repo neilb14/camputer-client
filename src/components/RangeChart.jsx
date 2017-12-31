@@ -1,5 +1,6 @@
 import React from 'react';
 import { LineChart, Line, XAxis, YAxis } from 'recharts';
+import '../css/range-chart.css';
 
 const moment = require('moment-timezone');
 
@@ -19,14 +20,31 @@ const reverse = (data) => {
     return results;
 }
 
+const combine = (insideData, outsideData) => {
+    let results = [];
+    for(var i=0; i< insideData.length; i++){
+        let c = {
+            inside: insideData[i].value,
+            outside: null,
+            timestamp: insideData[i].timestamp
+        };
+        if(i < outsideData.length) {
+            c.outside = outsideData[i].value;
+        }
+        results.push(c);
+    }
+    return results;
+}
+
 const RangeChart = (props) => {
-    let reversedData = reverse(props.sensorData);
+    let data = combine(reverse(props.insideData), reverse(props.outsideData));
     return (
-        <div>
-            <LineChart width={400} height={300} data={ reversedData } margin={{ top: 5, right: 30, left: 20, bottom: 5 }}>
+        <div className="range-chart">
+            <LineChart width={400} height={300} data={ data } margin={{ top: 5, right: 30, left: 20, bottom: 5 }}>
                 <XAxis dataKey="timestamp" tickFormatter={formatTimestamp} />
                 <YAxis label="C" domain={['dataMin - 4', 'dataMax+4']} allowDecimals={false} tickFormatter={formatTemperature}/>
-                <Line type="monotone" dataKey="value" stroke="#8884d8" dot={false}/>
+                <Line type="monotone" dataKey="inside" stroke="#ff3300" dot={false}/>
+                <Line type="monotone" dataKey="outside" stroke="#0000ff" dot={false}/>
             </LineChart>
         </div>
     );
