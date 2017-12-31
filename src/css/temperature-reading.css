@@ -2,3 +2,15 @@
     float: left;
     margin-right: 30px;
 }
+
+.temperature-reading-left img {
+    height: 72px;
+}
+
+.temperature-reading-container {
+    height: 72px;
+}
+
+.clear {
+    float: none;
+}
