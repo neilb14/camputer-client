@@ -18,7 +18,8 @@ let formatUom = function(uom) {
 }
 
 const h4Style = {
-    fontSize: '18px',
+    'fontSize': '18px',
+    'margin-bottom': '0px'
 }
 
 const SensorValue = (props) => {

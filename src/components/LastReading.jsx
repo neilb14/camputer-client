@@ -9,8 +9,10 @@ let formatDate = function (d) {
 }
 
 const h2Style = {
-    fontSize: '16px',
-    fontWeight: 'bold',
+    'fontSize': '16px',
+    'fontWeight': 'bold',
+    'margin-top': '4px',
+    'margin-bottom': '4px'
 }
 
 const timestampStyle = {
