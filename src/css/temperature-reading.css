@@ -8,7 +8,10 @@
 }
 
 .temperature-reading-container {
-    height: 72px;
+    height: 76px;
+    padding: 4px;
+    background: rgba(255,255,255,0.8);
+    border-radius: 10px;
 }
 
 .clear {
