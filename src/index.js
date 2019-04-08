@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
 import ReactDOM from 'react-dom';
-import PageHeader from 'react-bootstrap/lib/PageHeader';
 import axios from 'axios';
 import moment from 'moment-timezone';
 import LastReading from './components/LastReading';
@@ -43,7 +42,7 @@ class App extends Component {
     .then((res) => { this.setState({darksky:res.data}); })
     .catch((err) => { console.log(err); })
   }
-  
+
   getLastHumidity() {
     axios.get(`${process.env.REACT_APP_CAMPUTER_SERVICE_URL}/sensorreadings/last?name=humidity`)
     .then((res) => { this.setState({humidity:res.data}); })
@@ -60,7 +59,7 @@ class App extends Component {
   }
 
   onTimeout() {
-    this.setState({time: moment().tz('America/Edmonton').format(' h:mma MMMM DD, YYYY')}); 
+    this.setState({time: moment().tz('America/Edmonton').format(' h:mma MMMM DD, YYYY')});
     this.getLastTemperature();
     this.getLastOutside();
     this.getLastDarksky();
@@ -81,7 +80,7 @@ class App extends Component {
   render() {
     return (
       <div className="container">
-        <PageHeader><img className='logo' src='./images/002-camping-144x144.png' alt='Logo' height='60px'/><small>{ this.state.time }</small></PageHeader>
+        <div className="page-header"><img className='logo' src='./images/002-camping-144x144.png' alt='Logo' height='60px'/><small>{ this.state.time }</small></div>
         <div className="row">
             <div className="col-md-3">
                 <TemperatureReading  sensorData={this.state.temperature} sensorName="Inside" />
@@ -104,7 +103,7 @@ class App extends Component {
             </div>
             <div className="col-md-3">
                 <LastReading sensorData={this.state.humidity} sensorName="Humidity" />
-            </div>            
+            </div>
         </div>
     </div>
     )
