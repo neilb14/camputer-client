@@ -79,33 +79,40 @@ class App extends Component {
 
   render() {
     return (
-      <div className="container">
-        <div className="page-header"><img className='logo' src='./images/002-camping-144x144.png' alt='Logo' height='60px'/><small>{ this.state.time }</small></div>
-        <div className="row">
-            <div className="col-md-3">
-                <TemperatureReading  sensorData={this.state.temperature} sensorName="Inside" />
+        <React.Fragment>
+            <nav className="navbar navbar-light bg-light">
+                <a className="navbar-brand" href="#">
+                    <img className='d-inline align-top' src='./images/002-camping-144x144.png' alt='Camputer' width='60px' height='60px' />
+                    { this.state.time }
+                </a>
+            </nav>
+            <div className="container">
+                <div className="row">
+                    <div className="col-md-3">
+                        <TemperatureReading  sensorData={this.state.temperature} sensorName="Inside" />
+                    </div>
+                    <div className="col-md-3">
+                        <TemperatureReading sensorData={this.state.outside} sensorName="Outside" />
+                    </div>
+                    <div className="col-md-3">
+                        <TemperatureReading sensorData={this.state.darksky} sensorName="Darksky" />
+                    </div>
+                </div>
+                <div className="row">
+                    <div className="col-md-6">
+                        <RangeChart insideData={ this.state.range_inside } outsideData={ this.state.range_outside } />
+                    </div>
+                </div>
+                <div className="row">
+                    <div className="col-md-3">
+                        <RangeReading sensorData={this.state.range_inside} sensorName="3hrs Temperature" />
+                    </div>
+                    <div className="col-md-3">
+                        <LastReading sensorData={this.state.humidity} sensorName="Humidity" />
+                    </div>
+                </div>
             </div>
-            <div className="col-md-3">
-                <TemperatureReading sensorData={this.state.outside} sensorName="Outside" />
-            </div>
-            <div className="col-md-3">
-                <TemperatureReading sensorData={this.state.darksky} sensorName="Darksky" />
-            </div>
-        </div>
-        <div className="row">
-            <div className="col-md-6">
-                <RangeChart insideData={ this.state.range_inside } outsideData={ this.state.range_outside } />
-            </div>
-        </div>
-        <div className="row">
-            <div className="col-md-3">
-                <RangeReading sensorData={this.state.range_inside} sensorName="3hrs Temperature" />
-            </div>
-            <div className="col-md-3">
-                <LastReading sensorData={this.state.humidity} sensorName="Humidity" />
-            </div>
-        </div>
-    </div>
+        </React.Fragment>
     )
   }
 }

@@ -1,12 +1,37 @@
 body {
-  margin: 0;
+  margin: 4px 8px;
   padding: 0;
-  font-family: sans-serif;
-  background: url('/images/42721-O3GJBF.jpg') no-repeat center center fixed; 
-  -webkit-background-size: cover;
-  -moz-background-size: cover;
-  -o-background-size: cover;
-  background-size: cover;
+  font-family: "Montserrat", "Roboto", sans-serif;
+  background: no-repeat url('../images/header-background.png');
+  background-color: #CCE6CF;
+}
+
+h1 {
+  font-family: "Gilroy", "Roboto", sans-serif;
+  font-weight: bold;
+}
+
+.temperature-reading-container {
+  background-color: #f7f7f7;
+}
+
+.navbar-brand {
+  color: darkslategrey;
+}
+.navbar-brand img {
+  display: inline;
+  margin-right: 12px;
+}
+
+.container {
+  margin: 50px 12px;
+}
+
+.page-header {
+  background: #337ab7;
+  width: 100%;
+  margin: 0 0;
+  padding: 12px 16px;
 }
 
 .page-header img.logo {
