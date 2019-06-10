@@ -28,6 +28,6 @@ const LastReading = (props) => {
             <span className='timestamp' style={ timestampStyle }>{ formattedDate }</span>
         </div>
     );
-}
+};
 
 export default LastReading;

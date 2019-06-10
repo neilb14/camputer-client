@@ -20,6 +20,7 @@ class App extends Component {
         darksky: {},
         outside: {},
         humidity: {},
+        core: {},
         range_inside: [],
         range_outside: []
     }
@@ -43,6 +44,12 @@ class App extends Component {
     .catch((err) => { console.log(err); })
   }
 
+    getLastCore() {
+        axios.get(`${process.env.REACT_APP_CAMPUTER_SERVICE_URL}/sensorreadings/last?name=core`)
+            .then((res) => { this.setState({core:res.data}); })
+            .catch((err) => { console.log(err); })
+    }
+
   getLastHumidity() {
     axios.get(`${process.env.REACT_APP_CAMPUTER_SERVICE_URL}/sensorreadings/last?name=humidity`)
     .then((res) => { this.setState({humidity:res.data}); })
@@ -65,6 +72,7 @@ class App extends Component {
     this.getLastDarksky();
     this.getTemperatureRange();
     this.getLastHumidity();
+    this.getLastCore();
     setTimeout(() => { this.onTimeout() }, this.timeoutInMs);
   }
 
@@ -74,12 +82,14 @@ class App extends Component {
     this.getLastOutside();
     this.getTemperatureRange();
     this.getLastHumidity();
+    this.getLastCore();
     setTimeout(()=>{ this.onTimeout() }, this.timeoutInMs)
   }
 
   render() {
     return (
-        <React.Fragment>
+        <>
+            <div className="top-bar"/>
             <nav className="navbar navbar-light bg-light">
                 <a className="navbar-brand" href="#">
                     <img className='d-inline align-top' src='./images/002-camping-144x144.png' alt='Camputer' width='60px' height='60px' />
@@ -97,6 +107,9 @@ class App extends Component {
                     <div className="col-md-3">
                         <TemperatureReading sensorData={this.state.darksky} sensorName="Darksky" />
                     </div>
+                    <div className="col-md-3">
+                        <TemperatureReading sensorData={this.state.core} sensorName="Core" />
+                    </div>
                 </div>
                 <div className="row">
                     <div className="col-md-6">
@@ -112,7 +125,7 @@ class App extends Component {
                     </div>
                 </div>
             </div>
-        </React.Fragment>
+        </>
     )
   }
 }
