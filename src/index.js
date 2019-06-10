@@ -12,7 +12,7 @@ import './css/index.css';
 
 class App extends Component {
     constructor() {
-    super()
+    super();
     this.timeoutInMs = 1*60*1000;
     this.state = {
         time: moment().tz('America/Edmonton').format(' h:mma MMMM DD, YYYY'),
@@ -22,7 +22,8 @@ class App extends Component {
         humidity: {},
         core: {},
         range_inside: [],
-        range_outside: []
+        range_outside: [],
+        hours: 3,
     }
   }
 
@@ -56,11 +57,11 @@ class App extends Component {
     .catch((err) => { console.log(err); })
   }
 
-  getTemperatureRange() {
-    axios.get(`${process.env.REACT_APP_CAMPUTER_SERVICE_URL}/sensorreadings?name=temperature&hours=3`)
+  getTemperatureRange(hours) {
+    axios.get(`${process.env.REACT_APP_CAMPUTER_SERVICE_URL}/sensorreadings?name=temperature&hours=${hours}`)
       .then((res) => { this.setState({range_inside:res.data.readings}); })
       .catch((err) => { console.log(err); });
-    axios.get(`${process.env.REACT_APP_CAMPUTER_SERVICE_URL}/sensorreadings?name=outside&hours=3`)
+    axios.get(`${process.env.REACT_APP_CAMPUTER_SERVICE_URL}/sensorreadings?name=outside&hours=${hours}`)
       .then((res) => { this.setState({range_outside:res.data.readings}); })
       .catch((err) => { console.log(err); });
   }
@@ -70,7 +71,7 @@ class App extends Component {
     this.getLastTemperature();
     this.getLastOutside();
     this.getLastDarksky();
-    this.getTemperatureRange();
+    this.getTemperatureRange(this.state.hours);
     this.getLastHumidity();
     this.getLastCore();
     setTimeout(() => { this.onTimeout() }, this.timeoutInMs);
@@ -80,10 +81,15 @@ class App extends Component {
     this.getLastDarksky();
     this.getLastTemperature();
     this.getLastOutside();
-    this.getTemperatureRange();
+    this.getTemperatureRange(this.state.hours);
     this.getLastHumidity();
     this.getLastCore();
     setTimeout(()=>{ this.onTimeout() }, this.timeoutInMs)
+  }
+
+  changeHours(hours) {
+    this.setState({ hours });
+    this.getTemperatureRange(hours);
   }
 
   render() {
@@ -111,6 +117,13 @@ class App extends Component {
                         <TemperatureReading sensorData={this.state.core} sensorName="Core" />
                     </div>
                 </div>
+                <div className="row chart-controls">
+                    <div className="col-md-6">
+                        <button className="btn-primary" onClick={() => this.changeHours(3)}>3 Hrs</button>
+                        <button className="btn-primary" onClick={() => this.changeHours(12)}>12 Hrs</button>
+                        <button className="btn-primary" onClick={() => this.changeHours(24)}>24 Hrs</button>
+                    </div>
+                </div>
                 <div className="row">
                     <div className="col-md-6">
                         <RangeChart insideData={ this.state.range_inside } outsideData={ this.state.range_outside } />
@@ -118,7 +131,10 @@ class App extends Component {
                 </div>
                 <div className="row">
                     <div className="col-md-3">
-                        <RangeReading sensorData={this.state.range_inside} sensorName="3hrs Temperature" />
+                        <RangeReading sensorData={this.state.range_outside} range={this.state.hours} sensorName="Outside Temperature" />
+                    </div>
+                    <div className="col-md-3">
+                        <RangeReading sensorData={this.state.range_inside} range={this.state.hours} sensorName="Inside Temperature" />
                     </div>
                     <div className="col-md-3">
                         <LastReading sensorData={this.state.humidity} sensorName="Humidity" />

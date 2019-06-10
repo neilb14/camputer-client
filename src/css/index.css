@@ -47,3 +47,12 @@ h1 {
 .page-header img.logo {
   margin-right: 12px;
 }
+
+.chart-controls {
+  margin-top: 20px;
+}
+
+.chart-controls button {
+  width: 60px;
+  margin-left: 8px;
+}
